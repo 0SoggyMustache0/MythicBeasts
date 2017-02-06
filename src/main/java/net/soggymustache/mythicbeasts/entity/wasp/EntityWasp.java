@@ -43,11 +43,15 @@ public class EntityWasp extends EntityFlying implements IMob {
     }
     
     @Override
-    public boolean attackEntityAsMob(Entity target)
+    public boolean attackEntityAsMob(Entity entity)
     {
+        ((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 400, 2));
+        ((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 400, 2));
+        ((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.poison.id, 400, 2));
         float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
-        return target.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), f); 
     }
+	
     
     @Override
     protected SoundEvent getAmbientSound()
